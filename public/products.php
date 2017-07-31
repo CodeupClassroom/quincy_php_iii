@@ -11,19 +11,40 @@
 // then pass to `extract()` to clearly define the boundary between our logic and
 // our presentation
 
-$products = [];
+function pageController() {
+    $products = [];
 
-$coffee = ['name' => 'Drip Coffee', 'price' => 1.99, 'quantity' => 3];
-$products[] = $coffee;
+    $coffee = ['name' => 'Drip Coffee', 'price' => 1.99, 'quantity' => 3];
+    $products[] = $coffee; // same as array_push($products, $coffee)
 
-$espresso = ['name' => 'Espresso', 'price' => 2.99, 'quantity' => 1];
-$products[] = $espresso;
+    $espresso = ['name' => 'Espresso', 'price' => 2.99, 'quantity' => 1];
+    $products[] = $espresso;
 
-$tea = ['name' => 'Iced Tea', 'price' => 1.49, 'quantity' => 5];
-$products[] = $tea;
+    $tea = ['name' => 'Iced Tea', 'price' => 1.49, 'quantity' => 5];
+    $products[] = $tea;
 
-$bottledWater = ['name' => 'Bottled Water', 'price' => 2.49, 'quantity' => 0];
-$products[] = $bottledWater;
+    $bottledWater = ['name' => 'Bottled Water', 'price' => 2.49, 'quantity' => 0];
+    $products[] = $bottledWater;
+
+    return [
+        'products' => $products,
+        'heading' => 'It\'s the fall sale!',
+    ];
+
+    // instead of returning the array literal above, you could also do:
+    // $data = [];
+    // $data['products'] = $products;
+    // $data['heading'] = 'It\'s the fall sale!';
+
+    // return $data;
+
+}
+
+/* $products = pageController()['products']; */
+/* $heading = pageController()['heading']; */
+// same as
+
+extract(pageController());
 
 ?>
 <!DOCTYPE html>
@@ -36,6 +57,7 @@ $products[] = $bottledWater;
 <body>
 
     <div class="container">
+        <h1 class="text-center"><?= $heading ?></h1>
         <div class="row">
             <?php foreach($products as $product): ?>
                 <div class="col-md-6">
