@@ -1,11 +1,29 @@
 <?php
 
-$products = [
-    ['name' => 'Drip Coffee', 'price' => 1.99, 'quantity' => 3],
-    ['name' => 'Espresso', 'price' => 2.99, 'quantity' => 1],
-    ['name' => 'Iced Tea', 'price' => 1.49, 'quantity' => 5],
-    ['name' => 'Bottled Water', 'price' => 2.49, 'quantity' => 0],
-];
+// pageController() function
+// -- a function that encapsulates the logic you need to do on a page
+// -- we'll define this
+// extract() function
+// -- accepts an associative array whose keys will be turned into variables
+// -- built in to php
+
+// our pageController function can return an associative array, which we will
+// then pass to `extract()` to clearly define the boundary between our logic and
+// our presentation
+
+$products = [];
+
+$coffee = ['name' => 'Drip Coffee', 'price' => 1.99, 'quantity' => 3];
+$products[] = $coffee;
+
+$espresso = ['name' => 'Espresso', 'price' => 2.99, 'quantity' => 1];
+$products[] = $espresso;
+
+$tea = ['name' => 'Iced Tea', 'price' => 1.49, 'quantity' => 5];
+$products[] = $tea;
+
+$bottledWater = ['name' => 'Bottled Water', 'price' => 2.49, 'quantity' => 0];
+$products[] = $bottledWater;
 
 ?>
 <!DOCTYPE html>
