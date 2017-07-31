@@ -1,19 +1,28 @@
 <?php
 
+function randomArrayElement($array)
+{
+    return $array[rand(0, count($array) - 1)];
+}
+
+function randomServerName($arr1, $arr2)
+{
+    return randomArrayElement($arr1) . " " . randomArrayElement($arr2);
+}
+
+function pageController()
+{
     $adjectives = ['protective','old-fashioned','lethal','resonant','observant','illustrious','quixotic','sable','rightful','grandiose','unsuitable','vivacious'];
     $nouns = ['detail','account','tendency','instrument','industry','water','chance','question','step','rice'];
 
-    function randomArrayElement($array)
-    {
-        return $array[rand(0, count($array) - 1)];
-    }
+    $data = [
+        'serverName' => randomServerName($adjectives, $nouns),
+    ];
+    return $data;
+}
 
-    function randomServerName($arr1, $arr2)
-    {
-        return randomArrayElement($arr1) . " " . randomArrayElement($arr2);
-    }
+extract(pageController());
 
-    $serverName = randomServerName($adjectives, $nouns);
 ?>
 
 
@@ -49,11 +58,6 @@
     <main class="container">
 
         <h1><?= $serverName ?></h1>
-
-        <?php for($i = 0; $i < 10; $i += 1) { ?>
-            inside of the loop
-            <?= "\n\n\n\n\n\n\n\n\n\n\n\n" ?>
-        <?php } ?>
 
     </main>
 

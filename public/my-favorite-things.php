@@ -1,8 +1,16 @@
-<!-- http://codeup.dev/my-favorite-things.php -->
 <?php
 
-    $favs = ['coding', 'piano', 'family', 'food', 'friends'];
+function pageController() {
+    $favoriteThings = ['coding', 'piano', 'family', 'food', 'friends'];
+    $randomThing = $favoriteThings[array_rand($favoriteThings)];
 
+    return [
+        'favoriteThings' => $favoriteThings,
+        'thingOfTheDay' => $randomThing,
+    ];
+}
+
+extract(pageController());
 ?>
 
 <!DOCTYPE html>
@@ -39,9 +47,11 @@
 
         <h1 class="text-center">My Favorite Things</h1>
 
+        <h2>Thing of the day: <?= $thingOfTheDay ?></h2>
+
         <table class="table table-striped">
 
-            <?php foreach($favs as $fav): ?>
+            <?php foreach($favoriteThings as $fav): ?>
                 <tr>
                     <td><?= $fav ?></td>
                 </tr>
