@@ -1,5 +1,4 @@
-<!-- http://codeup.dev/server-name-generator.php -->
-<?php 
+<?php
 
     $adjectives = ['protective','old-fashioned','lethal','resonant','observant','illustrious','quixotic','sable','rightful','grandiose','unsuitable','vivacious'];
     $nouns = ['detail','account','tendency','instrument','industry','water','chance','question','step','rice'];
@@ -14,6 +13,7 @@
         return randomArrayElement($arr1) . " " . randomArrayElement($arr2);
     }
 
+    $serverName = randomServerName($adjectives, $nouns);
 ?>
 
 
@@ -35,7 +35,7 @@
 
     <!-- Custom CSS -->
     <style type="text/css">
-        
+
         h1 {
             text-transform: capitalize;
         }
@@ -48,10 +48,15 @@
 
     <main class="container">
 
-        <h1><?php echo randomServerName($adjectives, $nouns) ?></h1>
+        <h1><?= $serverName ?></h1>
+
+        <?php for($i = 0; $i < 10; $i += 1) { ?>
+            inside of the loop
+            <?= "\n\n\n\n\n\n\n\n\n\n\n\n" ?>
+        <?php } ?>
 
     </main>
-    
+
     <!-- jQuery Version 1.11.1 -->
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 

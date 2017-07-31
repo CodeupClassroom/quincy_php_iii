@@ -1,5 +1,5 @@
 <!-- http://codeup.dev/my-favorite-things.php -->
-<?php 
+<?php
 
     $favs = ['coding', 'piano', 'family', 'food', 'friends'];
 
@@ -24,7 +24,7 @@
 
     <!-- Custom CSS -->
     <style type="text/css">
-        
+
         td {
             text-transform: capitalize;
         }
@@ -38,19 +38,19 @@
     <main class="container">
 
         <h1 class="text-center">My Favorite Things</h1>
-        
+
         <table class="table table-striped">
-            
-            <?php foreach($favs as $fav) { ?>
+
+            <?php foreach($favs as $fav): ?>
                 <tr>
-                    <td><?php echo $fav ?></td>
+                    <td><?= $fav ?></td>
                 </tr>
-            <?php } ?>
-            
+            <?php endforeach; ?>
+
         </table>
 
     </main>
-    
+
     <!-- jQuery Version 1.11.1 -->
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
