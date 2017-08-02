@@ -1,3 +1,24 @@
+<?php  
+session_start();
+
+
+function pageController()
+{
+	$data = [];
+
+	// check to see if user is logged in. if not, get'm back to the login.php page
+	if(!isset($_SESSION['logged_in_user'])) {
+		header("Location: login.php");
+		die();
+	}
+
+	$data['username'] = $_SESSION['logged_in_user'];
+	return $data;
+}
+
+extract(pageController());
+
+?>
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
@@ -19,11 +40,14 @@
 
 </head>
 <body>
-
 	<main class="container">
 		<h1>Authorized!</h1>
-		<img src="/img/200.jpeg">
+		<h2>Welcome, <?= escape($username) ?></h2>
+		<a href="logout.php">Click here to logout securely :D</a>
 	</main>
+
+<?php include 'footer.php' ?>
+
 
 	<!-- minified jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>

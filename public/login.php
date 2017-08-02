@@ -1,38 +1,46 @@
 <?php 
 
-	var_dump($_POST);
+session_start();
 
-	function pageController()
-	{
-		$data = [];
+require_once 'functions.php';
 
-		$message = "";
-		$username = (isset($_POST['username'])) ? $_POST['username'] : "";
-		$password = (isset($_POST['password'])) ? $_POST['password'] : "";
+function pageController()
+{
+	$data = [];
 
-		if (!empty($_POST)) {
-
-			if ($username == "guest" && $password == "password") {
-				header("Location: http://codeup.dev/authorized.php");
-				die();
-			} else {
-				$message = "Invalid login!";
-			}
-
-		}
-
-		$data = [
-
-			"username" => $username,
-			"password" => $password,
-			"message" => $message
-
-		];
-
-		return $data;
+	// check to see if $_SESSION has a logged_in_user key/value, if so redirect to authorized.php
+	if(isset($_SESSION['logged_in_user'])) {
+		header("Location: authorized.php");
+		die();
 	}
 
-	extract(pageController());
+	$message = "";
+	$username = inputGet('username');
+	$password = inputGet('password');
+
+	// user submitted the form
+	if (!empty($_POST)) {
+
+		if ($username == "guest" && $password == "password") {
+			
+			$_SESSION['logged_in_user'] = $username;
+
+			header("Location: authorized.php");
+			die();
+		} else {
+			$message = "Invalid login!";
+		}
+	}
+
+	$data = [
+		"username" => $username,
+		"message" => $message
+	];
+
+	return $data;
+}
+
+extract(pageController());
 
 ?>
 <!DOCTYPE html>
@@ -75,6 +83,9 @@ crossorigin="anonymous">
 		</form>
 
 	</main>
+
+<?php include 'footer.php' ?>
+
 	<!-- minified jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
