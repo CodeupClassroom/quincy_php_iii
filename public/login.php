@@ -15,7 +15,9 @@ function pageController()
 	}
 
 	$message = "";
+	// $username = (isset($_POST['username'])) ? $_POST['username'] : null;
 	$username = inputGet('username');
+	// $password = (isset($_POST['password'])) ? $_POST['password'] : null;
 	$password = inputGet('password');
 
 	// user submitted the form

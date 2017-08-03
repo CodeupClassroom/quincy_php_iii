@@ -1,6 +1,7 @@
 <?php  
 session_start();
 
+require_once "functions.php";
 
 function pageController()
 {
@@ -42,7 +43,9 @@ extract(pageController());
 <body>
 	<main class="container">
 		<h1>Authorized!</h1>
+		<!-- escape username -->
 		<h2>Welcome, <?= escape($username) ?></h2>
+
 		<a href="logout.php">Click here to logout securely :D</a>
 	</main>
 
