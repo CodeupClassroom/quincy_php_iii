@@ -1,18 +1,27 @@
-<!-- http://codeup.dev/server-name-generator.php -->
-<?php 
+<?php
 
+function randomArrayElement($array)
+{
+    return $array[rand(0, count($array) - 1)];
+}
+
+function randomServerName($arr1, $arr2)
+{
+    return randomArrayElement($arr1) . " " . randomArrayElement($arr2);
+}
+
+function pageController()
+{
     $adjectives = ['protective','old-fashioned','lethal','resonant','observant','illustrious','quixotic','sable','rightful','grandiose','unsuitable','vivacious'];
     $nouns = ['detail','account','tendency','instrument','industry','water','chance','question','step','rice'];
 
-    function randomArrayElement($array)
-    {
-        return $array[rand(0, count($array) - 1)];
-    }
+    $data = [
+        'serverName' => randomServerName($adjectives, $nouns),
+    ];
+    return $data;
+}
 
-    function randomServerName($arr1, $arr2)
-    {
-        return randomArrayElement($arr1) . " " . randomArrayElement($arr2);
-    }
+extract(pageController());
 
 ?>
 
@@ -35,7 +44,7 @@
 
     <!-- Custom CSS -->
     <style type="text/css">
-        
+
         h1 {
             text-transform: capitalize;
         }
@@ -48,10 +57,10 @@
 
     <main class="container">
 
-        <h1><?php echo randomServerName($adjectives, $nouns) ?></h1>
+        <h1><?= $serverName ?></h1>
 
     </main>
-    
+
     <!-- jQuery Version 1.11.1 -->
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
