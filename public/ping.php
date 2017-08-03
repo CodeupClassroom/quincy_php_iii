@@ -1,12 +1,13 @@
 <?php
 
+require_once 'functions.php';
+
+
 function pageController() {
 	$data = [];
-
-	$data['loseMessage'] = (isset($_GET['lose'])) ? " loses" : "";
 	
-	//if a value exists, get that value and assign to variable, else assign default value
-	$data['count'] = (isset($_GET['count'])) ? $_GET['count'] : 0;
+	// $data['count'] = (isset($_GET['count'])) ? $_GET['count'] : 0;
+	$data['count'] = inputGet('count');
 
 	return $data;
 }
@@ -39,7 +40,7 @@ crossorigin="anonymous">
 </head>
 <body>
 	<main class="container">
-		<h1>Ping <?= $loseMessage ?>!</h1>
+		<h1>Ping!</h1>
 		<h1>Counter: <?= $count ?></h1>
 		<a class="btn btn-primary" href="pong.php?count=<?= $count +1 ?>">Hit</a>
 		<a class="btn btn-primary" href="ping.php?count=0&lose=true">Miss</a>
