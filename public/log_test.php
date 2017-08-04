@@ -2,10 +2,8 @@
 
 require_once "Log.php";
 
-$log = new Log();
+$logger = new Log('cli');
 
-$log->info("User successfully logged in");
+$logger->info("Something happened.");
 
-$log->error("Github is down. Freak out now.");
-
-$log->logMessage("CATASTROPHIC ERROR", "Everything is down. The system is down.");
+$logger->error("Something went wrong.");

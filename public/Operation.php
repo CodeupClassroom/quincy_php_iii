@@ -8,6 +8,13 @@ class Operation
 	public $currentOutput;
 	public $operationHistory = [];
 
+
+	public function __construct($num1 = 2, $num2 = 2)
+	{
+		$this->num1 = $num1;
+		$this->num2 = $num2;
+	}
+
 	public function addNums()
 	{
 		array_push($this->operationHistory, "add");
@@ -30,11 +37,6 @@ class Operation
 	{
 		array_push($this->operationHistory, "divide");
 		$this->currentOutput = ($this->num1 / $this->num2);
-	}
-
-	public function addArgs($firstNumber, $secondNumber)
-	{
-		return ($firstNumber + $secondNumber);
 	}
 
 	public function getCurrentOutput()
