@@ -3,32 +3,31 @@
 session_start();
 
 require_once 'functions.php';
+require_once "../Auth.php";
+require_once "../Input.php";
 
 function pageController()
 {
 	$data = [];
 
 	// check to see if $_SESSION has a logged_in_user key/value, if so redirect to authorized.php
-	if(isset($_SESSION['logged_in_user'])) {
+	if(Auth::check()) {
 		header("Location: authorized.php");
 		die();
 	}
 
 	$message = "";
-	// $username = (isset($_POST['username'])) ? $_POST['username'] : null;
-	$username = inputGet('username');
-	// $password = (isset($_POST['password'])) ? $_POST['password'] : null;
-	$password = inputGet('password');
+
+	$username = Input::get('username');
+
+	$password = Input::get('password');
 
 	// user submitted the form
 	if (!empty($_POST)) {
 
-		if ($username == "guest" && $password == "password") {
-			
-			$_SESSION['logged_in_user'] = $username;
-
+		if(Auth::attempt($username, $password)) {
 			header("Location: authorized.php");
-			die();
+			die();	
 		} else {
 			$message = "Invalid login!";
 		}

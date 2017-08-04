@@ -1,19 +1,19 @@
 <?php
 
+require_once '../Input.php';
 require_once 'functions.php';
-
 
 function pageController() {
 	$data = [];
 
-	// $data['count'] = (isset($_GET['count'])) ? $_GET['count'] : 0;
-	$data['count'] = inputGet('count');	
+	$data['count'] = Input::get('count', 0);
 
 	return $data;
 }
 
 extract(pageController());
 
+var_dump($_REQUEST);
 ?>
 <!DOCTYPE html>
 <html lang="en-us">
@@ -41,8 +41,8 @@ crossorigin="anonymous">
 <body>
 	<main class="container">
 		<h1>Pong!</h1>
-		<h1>Counter: <?= $count ?></h1>
-		<a class="btn btn-primary" href="ping.php?count=<?= $count +1 ?>">Hit</a>
+		<h1>Counter: <?= escape($count) ?></h1>
+		<a class="btn btn-primary" href="ping.php?count=<?= escape($count) +1 ?>">Hit</a>
 		<a class="btn btn-primary" href="pong.php?count=0&lose=true">Miss</a>
 
 
