@@ -1,30 +1,36 @@
 <?php
 
-class Log
-{
-    public $filename;
+class Log {
 
-    public function logMessage($level, $message)
-    {
-        $this->filename = "log-" . date('Y-m-d') . ".log";
+	public $filename;
+	public $handle;
 
-        $handle = fopen($this->filename, 'a');
+	public function __construct($prefix = 'log')
+	{
+		$this->filename = $prefix . "-" . date('Y-m-d') . ".log";
+		$this->handle = fopen($this->filename, 'a');
+	}
 
-        $stringToWrite = date("Y-m-d H:i:s") . " [" . $level . "] " . $message . PHP_EOL;
+	public function logMessage($level, $message) {
+		
+		$timestamp = date("Y-m-d H:i:s");
+		$logEntry = PHP_EOL . "$timestamp - $level - $message";
+		fwrite($this->handle, $logEntry);
 
-        fwrite($handle, $stringToWrite);
+	}
 
-        fclose($handle);
-    }   
+	public function info($message) {
+		$this->logMessage("INFO", $message);
+	} 
 
-    public function info($message)
-    {
-        $this->logMessage("INFO", $message);
-    }
+	public function error($message) {
+		$this->logMessage("ERROR", $message);
+	}
 
-    public function error($message)
-    {
-        $this->logMessage("ERROR", $message);
-    }
+	public function __destruct()
+	{
+		fclose($this->handle);
+	}
+
 
 }
