@@ -2,18 +2,19 @@
 session_start();
 
 require_once "functions.php";
+require_once "../Auth.php";
 
 function pageController()
 {
 	$data = [];
 
 	// check to see if user is logged in. if not, get'm back to the login.php page
-	if(!isset($_SESSION['logged_in_user'])) {
+	if(!Auth::check()) {
 		header("Location: login.php");
 		die();
 	}
 
-	$data['username'] = $_SESSION['logged_in_user'];
+	$data['username'] = Auth::user();
 	return $data;
 }
 
